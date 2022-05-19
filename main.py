@@ -293,6 +293,10 @@ class CalculationScreen(Screen):
                     new_record = FavouriteRecords(name=self.favourite_name.text, data=record)
                     session.add(new_record)
                     session.commit()
+                if not session.query(HistoryRecords).filter_by(data=record).first():
+                    new_record = HistoryRecords(name=datetime.today(), data=record)
+                    session.add(new_record)
+                    session.commit()
             elif instance == self.btn_print:
                 if not session.query(HistoryRecords).filter_by(data=record).first():
                     new_record = HistoryRecords(name=datetime.today(), data=record)
